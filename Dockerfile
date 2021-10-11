@@ -1,6 +1,6 @@
 FROM alpine
 MAINTAINER "sreebhagi3@gmail.com"
-COPY /webapp/target/webapp.war
+COPY /webapp/target/webapp.war /usr
 EXPOSE 9000
 CMD java -jar webapp.war
 
