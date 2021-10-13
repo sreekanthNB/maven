@@ -9,6 +9,17 @@
      name: python-pip
      state: present
      
+  - name: install docker
+    apt:
+     name: docker
+     state: present
+     
+  - name: start docker
+    service:
+     name: docker
+     state: started
+     enabled: yes
+     
   - name: start the container
     docker_container:
       name: sreekanth
