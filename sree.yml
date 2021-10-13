@@ -6,7 +6,7 @@
   tasks:
   - name: create docker 
     apt: 
-     name: python-pip
+     name: python3
      state: present
      
   - name: start docker
