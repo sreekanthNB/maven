@@ -1,0 +1,19 @@
+---
+- name: install docker
+  hosts: dev
+  become: true
+  
+  tasks:
+  - name: create docker 
+    apt: 
+     name: python-pip
+     state: present
+     
+  - name: start the container
+    docker_container:
+      name: sreekanth
+      image: "sreekanth143/sreekanthnarahari:first"
+      state: started
+      published_ports:
+        - 0.0.0.0:9010:9010
+      
