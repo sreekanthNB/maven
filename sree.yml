@@ -38,12 +38,12 @@
     # Creates the number of containers defined by the variable create_containers, using values from vars file
     - name: Create default containers
       docker_container:
-        name: "container1"
-        image: "vimal13/apache-webserver-php:v1"
+        name: "container2"
+        image: "sreekanth143/sreekanthnarahari:sreee23"
         state: started
         detach: yes
         exposed_ports:
-               - 80
+               - 90
         ports:
-               - "8080:80"
+               - "8010:90"
       with_sequence: count={{ create_containers }}
