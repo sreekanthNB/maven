@@ -1,36 +1,44 @@
 ---
-- name: install docker
-  hosts: dev
+- hosts: all
   become: true
-  
+  vars_files:
+    - vars/default.yml
+
   tasks:
-  - name: ensure repository key is installed
-    apt_key:
-     url: https://download.docker.com/linux/ubuntu/gpg
-     state: present
+    - name: Install aptitude using apt
+      apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
 
-  - name: ensure docker registry is available
-    apt_repository: repo='deb https://download.docker.com/linux/ubuntu bionic stable' state=present
+    - name: Install required system packages
+      apt: name={{ item }} state=latest update_cache=yes
+      loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools']
 
-  - name: ensure docker and dependencies are installed
-    apt: name=docker-ce update_cache=yes
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
 
-   # Uncomment the following to enable insecure registries with Docker
-  - name: ensure docker can use insecure registries in 10.11.0.0/16
-    lineinfile: "dest=/etc/default/docker regexp=^DOCKER_OPTS line=DOCKER_OPTS='--insecure-registry 10.11.0.0/16'"
+    - name: Add Docker Repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu bionic stable
+        state: present
 
-  - service: name=docker state=restarted
-  
-  - name: Pull default Docker image
-    docker_image:
-     name: "sreekanth143/sreekanthnarahari:first"
-     source: pull
-     
-  - name: start the container
-    docker_container:
-      name: sreekanth
-      image: "sreekanth143/sreekanthnarahari:first"
-      state: started
-      published_ports:
-        - 0.0.0.0:9010:9010
-      
+    - name: Update apt and install docker-ce
+      apt: update_cache=yes name=docker-ce state=latest
+
+    - name: Install Docker Module for Python
+      pip:
+        name: docker
+
+    - name: Pull default Docker image
+      docker_image:
+        name: "{{ sreekanth143/sreekanthnarahari:sreee23 }}"
+        source: pull
+
+    # Creates the number of containers defined by the variable create_containers, using values from vars file
+    - name: Create default containers
+      docker_container:
+        name: "{{ kanth }}{{ item }}"
+        image: "{{ sreekanth143/sreekanthnarahari:sreee23 }}"
+        command: "{{ docker run --name sree -d -P sreekanth143/sreekanthnarahari:sreee23}}"
+        state: present
+      with_sequence: count={{ 1 }}
