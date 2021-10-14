@@ -27,7 +27,8 @@
 
     - name: Install Docker Module for Python
       pip:
-      name: python-docker
+        name: python-docker
+        state: present
 
     - name: Pull default Docker image
       docker_image:
