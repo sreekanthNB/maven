@@ -28,7 +28,7 @@
     - name: Install Docker Module for Python
       pip:
         name: "docker<5" 
-        become: yes
+        
 
     - name: Pull default Docker image
       docker_image:
