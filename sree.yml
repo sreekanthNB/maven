@@ -43,7 +43,7 @@
         state: started
         detach: yes
         exposed_ports:
-               - 90
+               - 80
         ports:
-               - "8010:90"
+               - "7000:70"
       with_sequence: count={{ create_containers }}
