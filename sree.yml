@@ -43,5 +43,5 @@
         state: started
         detach: yes
         ports:
-              - "49170:90"
+              - "49170:8080"
       with_sequence: count={{ create_containers }}
