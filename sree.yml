@@ -23,7 +23,7 @@
   
   - name: Pull default Docker image
     docker_image:
-     name: "{{ default_container_image }}"
+     name: "{{ sreekanth143/sreekanthnarahari:first }}"
      source: pull
      
   - name: start the container
