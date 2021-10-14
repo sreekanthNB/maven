@@ -42,8 +42,6 @@
         image: "sreekanth143/sreekanthnarahari:sreee23"
         state: started
         detach: yes
-        exposed_ports:
-                   - 80
         ports:
-              - "49159:80"
+              - "49170:90"
       with_sequence: count={{ create_containers }}
