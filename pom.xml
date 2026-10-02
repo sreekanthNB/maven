@@ -38,7 +38,14 @@
 
     <plugins>
 
-      <!-- UPDATED: Java 6 -> Java 8 -->
+      <!-- SonarQube Maven Scanner -->
+      <plugin>
+        <groupId>org.sonarsource.scanner.maven</groupId>
+        <artifactId>sonar-maven-plugin</artifactId>
+        <version>5.4.0.6343</version>
+      </plugin>
+
+      <!-- Java Compiler -->
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.11.0</version>
@@ -48,6 +55,7 @@
         </configuration>
       </plugin>
 
+      <!-- Maven Release -->
       <plugin>
         <artifactId>maven-release-plugin</artifactId>
         <configuration>
@@ -55,6 +63,7 @@
         </configuration>
       </plugin>
 
+      <!-- Maven Site -->
       <plugin>
         <artifactId>maven-site-plugin</artifactId>
         <configuration>
@@ -104,7 +113,6 @@
           <version>2.8</version>
         </plugin>
 
-        <!-- UPDATED: 2.3.2 -> 3.11.0 -->
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.11.0</version>
@@ -228,11 +236,16 @@
     <connection>
       scm:git:git@github.com:jleetutorial/maven-project.git
     </connection>
+
     <developerConnection>
       scm:git:git@github.com:jleetutorial/maven-project.git
     </developerConnection>
+
     <tag>HEAD</tag>
-    <url>http://github.com/jleetutorial/maven-project</url>
+
+    <url>
+      http://github.com/jleetutorial/maven-project
+    </url>
   </scm>
 
   <prerequisites>
