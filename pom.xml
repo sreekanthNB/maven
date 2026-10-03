@@ -3,7 +3,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-         http://maven.apache.org/maven-v4_0_0.xsd">
+         https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
 
@@ -21,52 +21,90 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
 
+  <!-- Modules -->
   <modules>
     <module>server</module>
     <module>webapp</module>
   </modules>
 
+
+  <!-- ====================================================== -->
+  <!-- NEXUS REPOSITORY CONFIGURATION                         -->
+  <!-- ====================================================== -->
+
   <distributionManagement>
-    <site>
-      <id>site-server</id>
-      <name>Test Project Site</name>
-      <url>file:///tmp/maven-project-site</url>
-    </site>
+
+    <!-- Release Repository -->
+    <repository>
+      <id>nexus</id>
+      <name>Nexus Releases</name>
+      <url>http://13.217.143.206:8081/repository/maven-releases/</url>
+    </repository>
+
+    <!-- Snapshot Repository -->
+    <snapshotRepository>
+      <id>nexus</id>
+      <name>Nexus Snapshots</name>
+      <url>http://13.217.143.206:8081/repository/maven-snapshots/</url>
+    </snapshotRepository>
+
   </distributionManagement>
+
 
   <build>
 
     <plugins>
 
-      <!-- SonarQube Maven Scanner -->
+      <!-- ================================================== -->
+      <!-- SonarQube Maven Scanner                            -->
+      <!-- ================================================== -->
+
       <plugin>
         <groupId>org.sonarsource.scanner.maven</groupId>
         <artifactId>sonar-maven-plugin</artifactId>
         <version>5.4.0.6343</version>
       </plugin>
 
-      <!-- Java Compiler -->
+
+      <!-- ================================================== -->
+      <!-- Java Compiler                                      -->
+      <!-- ================================================== -->
+
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.11.0</version>
+
         <configuration>
           <source>8</source>
           <target>8</target>
         </configuration>
+
       </plugin>
 
-      <!-- Maven Release -->
+
+      <!-- ================================================== -->
+      <!-- Maven Release Plugin                               -->
+      <!-- ================================================== -->
+
       <plugin>
         <artifactId>maven-release-plugin</artifactId>
+
         <configuration>
           <autoVersionSubmodules>true</autoVersionSubmodules>
         </configuration>
+
       </plugin>
 
-      <!-- Maven Site -->
+
+      <!-- ================================================== -->
+      <!-- Maven Site Plugin                                  -->
+      <!-- ================================================== -->
+
       <plugin>
         <artifactId>maven-site-plugin</artifactId>
+
         <configuration>
+
           <reportPlugins>
 
             <plugin>
@@ -100,12 +138,20 @@
             </plugin>
 
           </reportPlugins>
+
         </configuration>
+
       </plugin>
 
     </plugins>
 
+
+    <!-- ==================================================== -->
+    <!-- Plugin Management                                   -->
+    <!-- ==================================================== -->
+
     <pluginManagement>
+
       <plugins>
 
         <plugin>
@@ -182,11 +228,18 @@
         </plugin>
 
       </plugins>
+
     </pluginManagement>
 
   </build>
 
+
+  <!-- ====================================================== -->
+  <!-- DEPENDENCY MANAGEMENT                                  -->
+  <!-- ====================================================== -->
+
   <dependencyManagement>
+
     <dependencies>
 
       <dependency>
@@ -230,9 +283,16 @@
       </dependency>
 
     </dependencies>
+
   </dependencyManagement>
 
+
+  <!-- ====================================================== -->
+  <!-- SOURCE CONTROL                                         -->
+  <!-- ====================================================== -->
+
   <scm>
+
     <connection>
       scm:git:git@github.com:jleetutorial/maven-project.git
     </connection>
@@ -246,7 +306,9 @@
     <url>
       http://github.com/jleetutorial/maven-project
     </url>
+
   </scm>
+
 
   <prerequisites>
     <maven>3.0.3</maven>
